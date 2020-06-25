@@ -1,17 +1,17 @@
 CREATE TABLE Users (
 
 	username TEXT NOT NULL UNIQUE, -- PK
-	password TINYTEXT NOT NULL,
+	pwd TINYTEXT NOT NULL,
 	email TINYTEXT NOT NULL UNIQUE,
 	name TINYTEXT NOT NULL,
 	phone TINYTEXT NOT NULL,
-	isAdmin TINYTEXT NOT NULL,
+	isAdmin CHAR NOT NULL,
 	createdAt DATE NOT NULL,
 	updatedAt DATE,
 
 	PRIMARY KEY(username)
 
-)
+);
 
 CREATE TABLE CartItem (
 
@@ -27,7 +27,7 @@ CREATE TABLE CartItem (
 	FOREIGN KEY(user) REFERENCES Users,
 	FOREIGN KEY(product) REFERENCES Products
 
-)
+);
 
 CREATE TABLE Orders (
 
@@ -46,7 +46,7 @@ CREATE TABLE Orders (
 	FOREIGN KEY(coupon) REFERENCES Coupons,
 	FOREIGN KEY(status) REFERENCES OrderStatuses
 
-)
+);
 
 CREATE TABLE OrderItem (
 
@@ -63,7 +63,7 @@ CREATE TABLE OrderItem (
 	FOREIGN KEY(order) REFERENCES Orders,
 	FOREIGN KEY(product) REFERENCES Products
 
-)
+);
 
 CREATE TABLE Products (
 
@@ -80,7 +80,7 @@ CREATE TABLE Products (
 	PRIMARY KEY(id),
 	FOREIGN KEY(category) REFERENCES Categories
 
-)
+);
 
 CREATE TABLE ProductReviews (
 
@@ -97,7 +97,7 @@ CREATE TABLE ProductReviews (
 	PRIMARY KEY(id),
 	FOREIGN KEY(user)
 
-)
+);
 
 CREATE TABLE ProductImages (
 
@@ -111,7 +111,7 @@ CREATE TABLE ProductImages (
 	PRIMARY KEY(id),
 	FOREIGN KEY(product) REFERENCES Products
 
-)
+);
 
 CREATE TABLE ProductFiles (
 
@@ -126,7 +126,7 @@ CREATE TABLE ProductFiles (
 	PRIMARY KEY(id),
 	FOREIGN KEY(product)
 
-)
+);
 
 CREATE TABLE Categories(
 
@@ -140,7 +140,7 @@ CREATE TABLE Categories(
 
 	PRIMARY KEY(id)
 
-)
+);
 
 CREATE TABLE OrderStatuses (
 
@@ -153,7 +153,7 @@ CREATE TABLE OrderStatuses (
 
 	PRIMARY KEY(id)
 
-)
+);
 
 CREATE TABLE Coupons (
 
@@ -174,7 +174,7 @@ CREATE TABLE Coupons (
 
 	PRIMARY KEY(id)
 
-)
+);
 
 CREATE TABLE Address  (
 
@@ -192,7 +192,7 @@ CREATE TABLE Address  (
 	PRIMARY KEY(id),
 	FOREIGN KEY(user) REFERENCES Users
 
-)
+);
 
 CREATE TABLE Payments(
 
@@ -211,7 +211,7 @@ CREATE TABLE Payments(
 	FOREIGN KEY(method) REFERENCES PaymentMethods,
 	FOREIGN KEY(order) REFERENCES Orders
 
-)
+);
 
 CREATE TABLE PaymentMethods (
 
@@ -227,7 +227,7 @@ CREATE TABLE PaymentMethods (
 
 	PRIMARY KEY(id)
 
-)
+);
 
 CREATE TABLE Cards(
 
@@ -242,7 +242,7 @@ CREATE TABLE Cards(
 	PRIMARY KEY(id),
 	FOREIGN KEY(user) REFERENCES Users
 
-)
+);
 
 CREATE TABLE Warehouses(
 
@@ -252,4 +252,4 @@ CREATE TABLE Warehouses(
 
 	PRIMARY KEY(id)
 
-)
+);
