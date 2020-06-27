@@ -1,0 +1,9 @@
+CREATE TABLE Warehouses(
+
+	id INT NOT NULL AUTO_INCREMENT,
+	name TEXT NOT NULL,
+	coords TEXT NOT NULL,
+
+	PRIMARY KEY(id)
+
+);

@@ -1,6 +1,6 @@
 CREATE TABLE Users (
 
-	username TEXT NOT NULL UNIQUE, -- PK
+	id INT AUTO_INCREMENT,
 	pwd TINYTEXT NOT NULL,
 	email TINYTEXT NOT NULL UNIQUE,
 	name TINYTEXT NOT NULL,
@@ -9,13 +9,13 @@ CREATE TABLE Users (
 	createdAt DATE NOT NULL,
 	updatedAt DATE,
 
-	PRIMARY KEY(username)
+	PRIMARY KEY(id)
 
 );
 
 CREATE TABLE CartItem (
 
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT AUTO_INCREMENT,
 	quantity INT NOT NULL,
 	product INT NOT NULL,
 	user TEXT NOT NULL,
@@ -48,22 +48,22 @@ CREATE TABLE Orders (
 
 );
 
-CREATE TABLE OrderItem (
+-- CREATE TABLE OrderItem (
 
-	id INT NOT NULL AUTO_INCREMENT,
-	order INT NOT NULL,
-	product INT NOT NULL,
-	amount DECIMAL NOT NULL,
-	quantity INT NOT NULL,
+-- 	id INT NOT NULL AUTO_INCREMENT,
+-- 	order INT NOT NULL,
+-- 	product INT NOT NULL,
+-- 	amount DECIMAL NOT NULL,
+-- 	quantity INT NOT NULL,
 
-	createdAt DATE NOT NULL,
-	updatedAt DATE,
+-- 	createdAt DATE NOT NULL,
+-- 	updatedAt DATE,
 
-	PRIMARY KEY(id),
-	FOREIGN KEY(order) REFERENCES Orders,
-	FOREIGN KEY(product) REFERENCES Products
+-- 	PRIMARY KEY(id),
+-- 	FOREIGN KEY(order) REFERENCES Orders,
+-- 	FOREIGN KEY(product) REFERENCES Products
 
-);
+-- );
 
 CREATE TABLE Products (
 
@@ -147,6 +147,7 @@ CREATE TABLE OrderStatuses (
 	id INT NOT NULL AUTO_INCREMENT,
 	name TINYTEXT NOT NULL,
 	description TEXT NOT NULL,
+    default CHAR NOT NULL,
 
 	createdAt DATE NOT NULL,
 	updatedAt DATE,
