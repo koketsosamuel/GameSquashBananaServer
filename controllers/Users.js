@@ -3,7 +3,7 @@ const colsVals = require("../util/colsAndRows")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const authConf = require("../config/auth")
-const e = require("express")
+const errMsg = require("../util/errorMsg")
 
 module.exports = {
 
@@ -31,7 +31,7 @@ module.exports = {
             conn.query(q, (err, results, fields) => {
                 if(err) {
                     
-                    res.json({err})
+                    res.json({err: errMsg(err.sqlMessage)})
 
                 } else {
                     res.json({results})
@@ -60,11 +60,11 @@ module.exports = {
             
             if(err) {
 
-                res.json({err})  
+                res.json({err: errMsg(err)})  
                 
             } else if(results.length == 0) {
                     
-                res.json({msg: "Account not found"})
+                res.json({err: errMsg("Account not found")})
 
             } else {
                 
