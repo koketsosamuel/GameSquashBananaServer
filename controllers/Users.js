@@ -34,7 +34,7 @@ module.exports = {
                     res.json({err: errMsg(err.sqlMessage)})
 
                 } else {
-                    res.json({results})
+                    res.json({results, msg: "Registered! You can now login"})
                 }
             })
 
@@ -78,10 +78,10 @@ module.exports = {
                         
                         // create and issue token
                         let token = jwt.sign({...user}, authConf.jwtKeyAuthKey, {expiresIn: "1h"})
-                        res.json({token})
+                        res.json({token, msg:"Logged In"})
 
                     } else {
-                        res.json({msg: "password incorrect"})
+                        res.json({err: errMsg("password incorrect")})
                     }
                 })
 
