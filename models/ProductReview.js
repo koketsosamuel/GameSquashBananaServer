@@ -1,35 +1,41 @@
 const mongoose = require("mongoose")
 
 const ProductReviewSchema = new mongoose.Schema({
+	rating: {
+		type: Number,
+		required: true,
+	},
 
-    rating: {
-        type: Number,
-        required: true
-    },
+	comment: {
+		type: String,
+		required: true,
+	},
 
-    comment: {
-        type: String,
-        required: true
-    },
+	user: {
+		type: String,
+		required: true,
+	},
 
-    user: {
-        type: String,
-        required: true
-    },
+	nameOfUser: {
+		type: String,
+		required: true,
+	},
 
-    product: {
-        type: String,
-        required: true,
-        index: true
-    },
+	show: {
+		type: Boolean,
+		default: false,
+	},
 
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+	product: {
+		type: String,
+		required: true,
+		index: true,
+	},
 
-    updatedAt: Date
-
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 })
 
 let ProductReview = mongoose.model("ProductReview", ProductReviewSchema)

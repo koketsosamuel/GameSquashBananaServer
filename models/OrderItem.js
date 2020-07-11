@@ -1,28 +1,32 @@
 const mongoose = require("mongoose")
 
 const OrderItemSchema = new mongoose.Schema({
+	quantity: {
+		type: Number,
+		required: true,
+	},
 
-    quantity: {
-        type: Number,
-        required: true
-    },
+	price: {
+		type: Number,
+		required: true,
+	},
 
-    price: {
-        type: Number,
-        required: true
-    },
+	product: {
+		type: String,
+		required: true,
+	},
 
-    product: {
-        type: String,
-        required: true
-    },
+	orderId: {
+		type: String,
+		required: true,
+		index: true,
+	},
 
-    order: {
-        type: String,
-        required: true,
-        index: true
-    }
-
+	userId: {
+		type: String,
+		required: true,
+		index: true,
+	},
 })
 
 let OrderItem = mongoose.model("OrderItem", OrderItemSchema)

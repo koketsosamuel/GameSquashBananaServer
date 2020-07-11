@@ -1,9 +1,7 @@
-const Sequelize = require("sequelize")
 
-const database = new Sequelize('test', 'iotshop', 'K0k3t$00', {
-    host: 'localhost',
-    dialect: 'mysql',
-    logging: false
-})
-
-module.exports = database
+module.exports = {
+    pwd: null,
+    username: null,
+    connStr: "mongodb://localhost:27017/iot",
+    options: {useNewUrlParser: true}
+}

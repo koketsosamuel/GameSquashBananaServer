@@ -1,1 +1,2 @@
 error messages with better understanding
+affliate system

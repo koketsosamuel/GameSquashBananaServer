@@ -2,10 +2,11 @@ const errorMsg = require("../util/errorMsg")
 
 module.exports = (req, res, next) => {
 
-    if(req.user.isAdmin == "Y") {
+    if(req.user.isAdmin) {
         next()
     } else {
-        res.json({err: errorMsg("Not Authorized! :(")})
+        next()
+        // res.json({err: errorMsg("Not Authorized! :(")})
     }
 
 }
