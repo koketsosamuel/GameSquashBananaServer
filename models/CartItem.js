@@ -1,32 +1,35 @@
 const mongoose = require("mongoose")
 
 const CartItemSchema = new mongoose.Schema({
+	quantity: {
+		type: Number,
+		defaultValue: 1,
+	},
 
-    quantity: {
-        type: Number,
-        defaultValue: 1
-    },
+	price: Number,
 
-    price: Number,
+	wish: {
+		type: Boolean,
+		default: false,
+	},
 
-    user: {
-        type: String,
-        required: true,
-        index: true
-    },
+	user: {
+		type: String,
+		required: true,
+		index: true,
+	},
 
-    product: {
-        type: String,
-        required: true
-    },
+	product: {
+		type: String,
+		required: true,
+	},
 
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 
-    updatedAt: Date
-
+	updatedAt: Date,
 })
 
 let CartItem = mongoose.model("CartItem", CartItemSchema)

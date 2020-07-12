@@ -1,42 +1,60 @@
 const mongoose = require("mongoose")
 
 const ProductSchema = new mongoose.Schema({
+	category: {
+		type: Number,
+		required: true,
+	},
 
-    category: {
-        type: Number,
-        required: true
-    },
+	subCategory: String,
 
-    subCategory: String,
+	name: {
+		type: String,
+		required: true,
+	},
 
-    name: {
-        type: String,
-        required: true
-    },
+	description: {
+		type: String,
+		required: true,
+	},
 
-    description: {
-        type: String,
-        required: true
-    },
+	price: {
+		type: Number,
+		required: true,
+	},
 
-    price: {
-        type: Number,
-        required: true
-    },
+	quantity: {
+		type: Number,
+		default: 0,
+	},
 
-    thumb: String,
+	vat: {
+		type: Boolean,
+		default: true,
+	},
 
-    tags: String,
+	thumb: String,
 
-    overallRating: Number,
+	tags: String,
 
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+	overallRating: Number,
 
-    updatedAt: Date
+	discontinued: {
+		type: Boolean,
+		default: false,
+	},
 
+	views: {
+		type: Number,
+		default: 0,
+	},
+
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
+
+	updatedAt: Date,
 })
 
 let Product = mongoose.model("Product", ProductSchema)
