@@ -6,8 +6,6 @@ const CartItemSchema = new mongoose.Schema({
 		defaultValue: 1,
 	},
 
-	price: Number,
-
 	wish: {
 		type: Boolean,
 		default: false,
