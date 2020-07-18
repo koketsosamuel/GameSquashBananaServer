@@ -9,11 +9,12 @@ function add(req, res) {
 		subCategory: req.body.subCategory,
 		tags: req.body.tags,
 		price: req.body.price,
+		quantity: req.body.quantity,
 	})
 
-	newCat.save((err) => {
+	newCat.save((err, results) => {
 		if (err) return res.json({ err: errorMsg("Error adding Product") })
-		res.json({ msg: "Product created!" })
+		res.json({ msg: "Product created!", results })
 	})
 }
 

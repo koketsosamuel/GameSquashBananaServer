@@ -4,7 +4,7 @@ const errorMsg = require("../../util/errorMsg")
 function getOne(req, res) {
 	Product.findOne(
 		{
-			_id: req.params.id,
+			_id: req.params.productId,
 		},
 		(err, product) => {
 			if (err)

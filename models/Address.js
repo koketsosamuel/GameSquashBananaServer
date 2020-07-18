@@ -1,44 +1,33 @@
 const mongoose = require("mongoose")
 
 const AddressSchema = new mongoose.Schema({
+	address: {
+		type: String,
+		required: true,
+	},
 
-    recipientName: {
-        type: String,
-        required: true
-    },
+	coords: {
+		type: String,
+	},
 
-    recipientPhone: {
-        type: String,
-        required: true
-    },
+	user: {
+		type: String,
+		required: true,
+		index: true,
+	},
 
-    additionalInfo: {
-        type: String,        
-    },
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 
-    address: {
-        type: Object,
-        required: true
-    },
-
-    coords: {
-        type: String,        
-    },
-
-    user: {
-        type: String,
-        required: true,
-        index: true
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-
-    updatedAt: Date
-
+	updatedAt: Date,
 })
 
 let Address = mongoose.model("Address", AddressSchema)
 module.exports = Address
+
+/*
+    Address best stored as a single text area
+    https://uxmovement.com/forms/why-you-should-use-a-text-area-for-address-form-fields/
+*/

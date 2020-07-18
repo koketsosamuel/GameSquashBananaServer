@@ -1,21 +1,6 @@
-let _rules = {
-	Price: [min, max],
-	minRating: 0,
-	inStock: null,
-	category: "",
-	subCategory: "",
-}
-
-let _nav = {
-	pages: null,
-	page: 1,
-	perpage: 16,
-	next: null,
-	prev: null,
-}
-
-function paginate(array, rules = _rules, nav = _nav) {
+function paginate(array, rules = {}, nav = {}) {
 	let products = []
+	let pages
 
 	for (let i = 0; i < array.length; i++) {
 		let put = true

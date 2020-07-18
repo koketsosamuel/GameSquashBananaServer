@@ -4,7 +4,7 @@ const Product = require("../../models/Product")
 function update(req, res) {
 	Product.updateOne(
 		{
-			_id: req.params.id,
+			_id: req.params.productId,
 		},
 		{
 			name: req.body.name,
@@ -13,7 +13,7 @@ function update(req, res) {
 			subCategory: req.body.subCategory || null,
 			tags: req.body.tags,
 			price: req.body.price,
-			updatedAt: Date.now,
+			updatedAt: Date.now(),
 			quantity: req.body.quantity,
 			vat: req.body.vat,
 		},

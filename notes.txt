@@ -1,2 +1,7 @@
 error messages with better understanding
 affliate system
+service
+    check if category for product still exists, if it doesnt set category to null
+    
+
+remove loggings

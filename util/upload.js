@@ -1,9 +1,9 @@
 const multer = require("multer")
-const config = require("../config/config")
+const config = require("../config/file")
 
 const multerStorage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		let dir = config.uploadDirTemp
+		let dir = config.tempImgFolder
 		cb(null, dir)
 	},
 
@@ -11,7 +11,6 @@ const multerStorage = multer.diskStorage({
 		cb(
 			null,
 			Date.now() +
-				req.user._id +
 				Math.ceil(Math.random() * 20) +
 				"." +
 				file.originalname.split(".")[

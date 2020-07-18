@@ -1,5 +1,5 @@
-const errorMsg = require("../util/errorMsg")
-const SubCategory = require("../models/SubCategory")
+const errorMsg = require("../../util/errorMsg")
+const SubCategory = require("../../models/SubCategory")
 
 function add(req, res) {
 	let newCat = new SubCategory({

@@ -1,8 +1,6 @@
-const database = require("../config/database")
-const Sequelize = require("sequelize")
-const Product = require("./Product")
+const mongoose = require("mongoose")
 
-const ProductImage = new mongoose.Schema({
+const ProductImageSchema = new mongoose.Schema({
 	image: {
 		type: String,
 		required: true,
@@ -20,6 +18,5 @@ const ProductImage = new mongoose.Schema({
 	},
 })
 
-ProductImage.belongsToMany(Product)
-
+let ProductImage = mongoose.model("ProductImage", ProductImageSchema)
 module.exports = ProductImage

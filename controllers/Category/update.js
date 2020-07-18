@@ -4,7 +4,7 @@ const errorMsg = require("../../util/errorMsg")
 function update(req, res) {
 	Category.updateOne(
 		{
-			_id: req.params.id,
+			_id: req.params.categoryId,
 		},
 		{
 			name: req.body.name,

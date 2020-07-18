@@ -31,9 +31,9 @@ function getAll(req, res) {
 		query.subCategory = subCategory
 	}
 
-	Product.find(query, { sort: sort }, (err, results) => {
+	Product.find({}, (err, results) => {
 		if (err) return res.json({ err: errorMsg("Error fetchibg products") })
-		res.json({ ...paginate(results, rules, nav) })
+		res.json({ results })
 	})
 }
 

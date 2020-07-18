@@ -8,7 +8,17 @@ module.exports = async function optimize(
 	width = config.imageResizeWidth
 ) {
 	try {
-		await sharp(inputUrl).resize(width).toFile(outputUrl)
+		await sharp(inputUrl)
+			.resize(width, width, {
+				fit: "contain",
+				background: {
+					r: 255,
+					g: 255,
+					b: 255,
+					alpha: 1,
+				},
+			})
+			.toFile(outputUrl)
 
 		fs.unlink(inputUrl, (err) => {
 			return false

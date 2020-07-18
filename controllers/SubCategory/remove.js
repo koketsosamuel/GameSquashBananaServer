@@ -1,8 +1,8 @@
-const errorMsg = require("../util/errorMsg")
-const SubCategory = require("../models/SubCategory")
+const errorMsg = require("../../util/errorMsg")
+const SubCategory = require("../../models/SubCategory")
 
 function remove(req, res) {
-	SubCategory.remove(
+	SubCategory.deleteOne(
 		{
 			_id: req.params.id,
 		},

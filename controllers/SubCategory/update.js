@@ -1,5 +1,5 @@
-const errorMsg = require("../util/errorMsg")
-const SubCategory = require("../models/SubCategory")
+const errorMsg = require("../../util/errorMsg")
+const SubCategory = require("../../models/SubCategory")
 
 function update(req, res) {
 	SubCategory.updateOne(
@@ -9,9 +9,10 @@ function update(req, res) {
 		{
 			name: req.body.name,
 			description: req.body.description,
-			updatedAt: Date.now,
+			updatedAt: Date.now(),
 		},
 		(err) => {
+			console.log(err)
 			if (err)
 				return res.json({
 					err: errorMsg("Error updating sub-category"),

@@ -24,11 +24,11 @@ function search(req, res) {
 		{
 			$or: {
 				name: {
-					$regex: req.query.search,
+					$regex: req.query.q,
 				},
 
 				tags: {
-					$regex: req.query.search,
+					$regex: req.query.q,
 				},
 			},
 		},

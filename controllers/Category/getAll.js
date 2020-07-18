@@ -4,21 +4,36 @@ const errorMsg = require("../../util/errorMsg")
 
 async function getAll(req, res) {
 	let resultsFinal = []
+	let sendRes
 
-	await Category.find({}, { sort: { name: 1 } }, (err, results) => {
-		if (err) return res.json({ err: errorMsg("Error fetching categories") })
+	await Category.find(
+		{},
+		null,
+		{ sort: { name: 1 } },
+		async (err, results) => {
+			if (err)
+				return res.json({ err: errorMsg("Error fetching categories") })
 
-		resultsFinal = results
+			resultsFinal = [...results]
+			sendRes = []
 
-		for (let i = 0; i < resultsFinal.length; i++) {
-			await SubCategory.find({ category: results[i] }, (err, results) => {
-                if (err) return res.json({ err: errorMsg("Error fetching categories") })
-                resultsFinal[i].subs = results
-            })
+			for await (let i of results) {
+				await SubCategory.find({ category: i._id }, (err, results) => {
+					if (err)
+						return res.json({
+							err: errorMsg("Error fetching sub categories"),
+						})
+					i = {
+						...i._doc,
+						subs: results,
+					}
+
+					sendRes.push(i)
+				})
+			}
+			res.json({ results: sendRes })
 		}
-	})
-
-	res.json({ results: resultsFinal })
+	)
 }
 
 module.exports = getAll
