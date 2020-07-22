@@ -11,7 +11,7 @@ function addThumb(req, res) {
 		"/" +
 		"thumb" +
 		String(Math.ceil(Math.random() * 777)) +
-		thumb.originalname
+		thumb.originalname.replace(" ", "")
 
 	imageResize(thumb.path, outThum, fileCOnf.thumbnailSizeWidth)
 

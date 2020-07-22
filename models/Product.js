@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
+const search = require("mongoose-regex-search")
 
 const ProductSchema = new mongoose.Schema({
+	
 	category: {
 		type: String,
 		required: false,
@@ -11,6 +13,7 @@ const ProductSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
+		searchable: true
 	},
 
 	description: {
@@ -35,7 +38,10 @@ const ProductSchema = new mongoose.Schema({
 
 	thumb: String,
 
-	tags: String,
+	tags: {
+		type: String,
+		searchable: true
+	},
 
 	overallRating: Number,
 
@@ -49,14 +55,21 @@ const ProductSchema = new mongoose.Schema({
 		default: 0,
 	},
 
+	sold:{
+		type: Number,
+		default: 0
+	},
+
 	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
 
 	updatedAt: Date,
+
 })
 
+ProductSchema.plugin(search)
 let Product = mongoose.model("Product", ProductSchema)
 
 module.exports = Product
