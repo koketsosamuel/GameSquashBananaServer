@@ -5,4 +5,5 @@ service
     
 
 remove loggings
-dont show discontinued
+dont show discontinued for non admin/product manager
+product delete if not in orders

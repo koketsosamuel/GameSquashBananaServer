@@ -38,6 +38,8 @@ function filterAndSort(ModelFind, queryObj, res) {
 	// sort
 	if (queryObj.sort) {
 		ModelFind.sort(queryObj.sort)
+	} else {
+		ModelFind.sort("-createdAt")
 	}
 
 	paginateRecords(ModelFind, queryObj, res)
@@ -50,7 +52,7 @@ function paginateRecords(ModelFind, queryObj, res) {
 
 	if (page < 1) page = 1
 	if (pages && page > pages) page = pages
-	if (perpage < 12) perpage = 12
+	if (perpage < 1) perpage = 12
 
 	if (pages) {
 		ModelFind.skip((page - 1) * perpage)
@@ -72,11 +74,13 @@ function paginateRecords(ModelFind, queryObj, res) {
 
 			pages = Math.ceil(results.length / perpage)
 
+			let total = results.length
+
 			let start = (page - 1) * perpage - 1
 			if (start < 1) start = 0
 
 			let _results = results.splice(start, perpage)
-			res.json({ nav: { page, perpage, pages }, results: _results })
+			res.json({ nav: { page, perpage, pages, total }, results: _results })
 		})
 	}
 }

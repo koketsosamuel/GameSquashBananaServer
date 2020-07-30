@@ -1,11 +1,16 @@
 const CartItem = require("../../models/CartItem")
 const errorMsg = require("../../util/errorMsg")
+const checkExistence = require("./helpers/checkExistence")
 
-function addWishList(req, res) {
+async function addWishList(req, res) {
+
+	let exists = await checkExistence(req.user._id, req.body.product, true)
+	if(exists) return res.json({info: "Already exists in your wishlist!"})	
+
 	let newWI = new CartItem({
 		wish: true,
 		user: req.user._id,
-		product: req.body.productId,
+		product: req.body.product,
 	})
 
 	newWI.save((err) => {

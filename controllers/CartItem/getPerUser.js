@@ -1,12 +1,32 @@
 const CartItem = require("../../models/CartItem")
 const errorMsg = require("../../util/errorMsg")
+const Product = require("../../models/Product")
 
-function getPerUser(req, res) {
-	CartItem.find({ user: req.user._id, wish: false }, (err, items) => {
-		if (err)
-			return res.json({ err: errorMsg("Error retrieving cart items") })
-		res.json({ results: items })
+async function getPerUser(req, res) {
+
+	let cart = {
+		items: [],
+		total: 0
+	}
+
+	CartItem.find({ user: req.user._id, wish: false }, async (err, items) => {
+		
+		if (err) return res.json({ err: errorMsg("Error retrieving cart items") })
+		
+		for (let i of items) {
+			await Product.findById(i.product, (err, doc) => {
+				cart.items.push({...i._doc, product: doc})
+				cart.total += doc.price * i.quantity
+			})
+		}
+		
+
+		res.json({results: cart})
 	})
+
+
+
+
 }
 
 module.exports = getPerUser

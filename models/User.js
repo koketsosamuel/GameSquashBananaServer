@@ -29,7 +29,10 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
 
-    roles: Array,
+    roles: {
+        type: Array,
+        default: []
+    },
 
     createdAt: {
         type: Date,

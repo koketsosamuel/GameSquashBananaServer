@@ -15,7 +15,7 @@ function register(req, res) {
 		newUser = new User({
 			name: user.name,
 			pwd: user.pwd,
-			email: user.email,
+			email: user.email.toLowerCase(),
 			phone: user.phone,
 		})
 

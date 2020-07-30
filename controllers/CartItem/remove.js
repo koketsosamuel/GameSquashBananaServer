@@ -1,17 +1,15 @@
 const CartItem = require("../../models/CartItem")
 const errorMsg = require("../../util/errorMsg")
 
-function remove(req, res) {
-	CartItem.findOne({ _id: req.params.cartItemId }, (err, item) => {
-		if (err) return res.json({ err: errorMsg("Error removing cart item") })
-		if (item.user != req.user._id)
-			return res.json({ err: errorMsg("Not Authorized") })
-		item.remove((err) => {
-			if (err)
-				return res.json({ err: errorMsg("Error removing cart item") })
-			res.json({ msg: "Cart item removed" })
+async function remove(req, res) {
+	
+	for(let i = 0; i < req.body.items.length;i++) {
+		await CartItem.deleteOne({ _id: req.body.items[i], user: req.user._id }, (err) => {
+			if(err) return res.json({err: errorMsg("Couldnt remove some of the items")})
 		})
-	})
+	}
+
+	res.json({msg: "Item(s) removed!"})
 }
 
 module.exports = remove

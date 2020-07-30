@@ -3,8 +3,6 @@ const paginate = require("./helpers/pagination")
 
 function getDiscontinued(req, res) {
 
-	console.log("HI");
-
 	let category = req.query.category || false
 	let subCategory = req.query.subCategory || false
 	let sort = req.query.sort || "-createdAt"
@@ -35,7 +33,6 @@ function getDiscontinued(req, res) {
 	}
 
 	Product.find({ ...query }, null, { sort: sort }, (err, results) => {
-		console.log(results)
 		if (err) return res.json({ err: errorMsg("Error fetching products") })
 		res.json({ ...paginate(results, rules, nav) })
 	})

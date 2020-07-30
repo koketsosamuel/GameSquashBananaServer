@@ -5,7 +5,7 @@ function changeQuantity(req, res) {
 	CartItem.updateOne(
 		{ _id: req.params.cartItemId },
 		{
-			quantity: req.params.quantity,
+			quantity: req.body.quantity,
 		},
 		(err) => {
 			if (err)

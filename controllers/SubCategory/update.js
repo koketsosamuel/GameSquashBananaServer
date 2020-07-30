@@ -12,7 +12,6 @@ function update(req, res) {
 			updatedAt: Date.now(),
 		},
 		(err) => {
-			console.log(err)
 			if (err)
 				return res.json({
 					err: errorMsg("Error updating sub-category"),

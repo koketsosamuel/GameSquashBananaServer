@@ -16,6 +16,10 @@ const ProductImageSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+
+	updatedAt: {
+		type: Date
+	},
 })
 
 let ProductImage = mongoose.model("ProductImage", ProductImageSchema)

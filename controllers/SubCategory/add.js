@@ -9,7 +9,6 @@ function add(req, res) {
 	})
 
 	newCat.save((err) => {
-		console.log(err)
 		if (err) return res.json({ err: errorMsg("Error adding sub-category") })
 
 		res.json({ msg: "sub-category created!" })

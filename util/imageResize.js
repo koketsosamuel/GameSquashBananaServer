@@ -5,7 +5,8 @@ const config = require("../config/file")
 module.exports = async function optimize(
 	inputUrl,
 	outputUrl,
-	width = config.imageResizeWidth
+	width = config.imageResizeWidth,
+	remove = true
 ) {
 	try {
 		await sharp(inputUrl)
@@ -20,10 +21,9 @@ module.exports = async function optimize(
 			})
 			.toFile(outputUrl)
 
-		fs.unlink(inputUrl, (err) => {
+		if(remove) fs.unlink(inputUrl, (err) => {
 			return false
 		})
 	} catch (err) {
-		console.log(err)
 	}
 }

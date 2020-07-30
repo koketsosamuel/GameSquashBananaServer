@@ -2,36 +2,34 @@ const fileCOnf = require("../../config/file")
 const Product = require("../../models/Product")
 const errorMsg = require("../../util/errorMsg")
 const imageResize = require("../../util/imageResize")
-const fs = require("fs")
+const ProductImage = require("../../models/ProductImage")
 
 function addThumb(req, res) {
-	let thumb = req.file
+
+	let imageExt = req.body.image.image.split(".")
+	imageExt = imageExt[imageExt.length - 1]
+
 	let outThum =
 		fileCOnf.thumbnailFolder +
 		"/" +
-		"thumb" +
-		String(Math.ceil(Math.random() * 777)) +
-		thumb.originalname.replace(" ", "")
+		req.params.productId +
+		imageExt
 
-	imageResize(thumb.path, outThum, fileCOnf.thumbnailSizeWidth)
+	imageResize(req.body.image.image, outThum, fileCOnf.thumbnailSizeWidth, false)
 
-	Product.findOne(
-		{ _id: req.params.productId },
+	Product.updateOne({_id: req.params.productId}, {
+		thumb: outThum
+	}, err => {
+		if(err) return res.json({err: errorMsg("Error adding thumbnail")})
+		res.json({msg: "Thumbnail added!"})
+	})
 
-		(err, prod) => {
-			if (err)
-				return res.json({ err: errorMsg("Error adding thumbnail") })
-			if (prod.thumb) fs.unlink(prod.thumb, () => {})
-			prod.thumb = outThum
-			prod.save((err) => {
-				if (err)
-					return res.json({
-						err: errorMsg("Error replacing old thumb"),
-					})
-				res.json({ msg: "Thumbnail added!" })
-			})
-		}
-	)
+	ProductImage.updateOne({
+		_id: req.body.image._id
+	}, {
+		updatedAt: Date.now()
+	}, err => {
+	})
 }
 
 module.exports = addThumb

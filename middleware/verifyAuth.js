@@ -8,9 +8,9 @@ function verifyAuth(req, res, next) {
 
     try {
 
-        if(!req.signedCookies.auth) throw "No token"
+        if(!req.session.auth) throw "No token"
 
-        let token = req.signedCookies.auth
+        let token = req.session.auth
         let user = jwt.verify(token, authConf.jwtKeyAuthKey)
 
         req.user = user
@@ -19,6 +19,7 @@ function verifyAuth(req, res, next) {
     } catch(err) {
         res.json({err: errorMsg("Not Authorized!")})
     }
+
 
 
 }

@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const CartItemSchema = new mongoose.Schema({
 	quantity: {
 		type: Number,
-		defaultValue: 1,
+		default: 1,
 	},
 
 	wish: {
