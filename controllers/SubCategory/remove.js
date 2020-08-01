@@ -1,20 +1,32 @@
 const errorMsg = require("../../util/errorMsg")
 const SubCategory = require("../../models/SubCategory")
+const Product = require("../../models/Product")
+
 
 function remove(req, res) {
-	SubCategory.deleteOne(
-		{
-			_id: req.params.id,
-		},
-		(err) => {
-			if (err)
-				return res.json({
-					err: errorMsg("Error removing sub-category! Try again!"),
-				})
+	Product.updateMany({subCategory: req.params.subCategoryId}, {
+		subCategory: null
+	}, (err) => {
 
-			res.json({ msg: "sub-category removed!" })
-		}
-	)
+		if (err)
+			return res.json({
+				err: errorMsg("Error removing sub-category! Try again!"),
+			})
+
+		SubCategory.deleteOne(
+			{
+				_id: req.params.subCategoryId,
+			},
+			(err) => {
+				if (err)
+					return res.json({
+						err: errorMsg("Error removing sub-category! Try again!"),
+					})
+	
+				res.json({ msg: "sub-category removed!" })
+			}
+		)
+	})
 }
 
 module.exports = remove

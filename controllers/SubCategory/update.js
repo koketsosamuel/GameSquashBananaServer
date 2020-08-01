@@ -4,7 +4,7 @@ const SubCategory = require("../../models/SubCategory")
 function update(req, res) {
 	SubCategory.updateOne(
 		{
-			_id: req.params.id,
+			_id: req.params.subCategoryId,
 		},
 		{
 			name: req.body.name,

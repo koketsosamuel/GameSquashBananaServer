@@ -17,7 +17,7 @@ function verifyAuth(req, res, next) {
         next()
 
     } catch(err) {
-        res.json({err: errorMsg("Not Authorized!")})
+        res.json({err: errorMsg("Not Authorized! Login first!")})
     }
 
 

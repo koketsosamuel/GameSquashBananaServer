@@ -3,10 +3,10 @@ const SubCategories = require("../controllers/SubCategory")
 const verifyAuth = require("../middleware/verifyAuth")
 const router = express.Router()
 
-router.get("/:id", SubCategories.getForCategory)
-router.get("/one/:id", SubCategories.getOne)
+router.get("/:categoryId", SubCategories.getForCategory)
+router.get("/one/:subCategoryId", SubCategories.getOne)
 router.post("/", SubCategories.add)
-router.put("/:id", SubCategories.update)
-router.delete("/:id", SubCategories.remove)
+router.put("/:subCategoryId", SubCategories.update)
+router.delete("/:subCategoryId", SubCategories.remove)
 
 module.exports = router

@@ -4,6 +4,7 @@ const changeQuantity = require("./changeQuantity")
 const getPerUser = require("./getPerUser")
 const getWishList = require("./getWishList")
 const wishToCart = require("./wishToCart")
+const cartToWish = require("./cartToWish")
 const remove = require("./remove")
 
 module.exports = {
@@ -14,4 +15,5 @@ module.exports = {
 	getWishList,
 	wishToCart,
 	remove,
+	cartToWish
 }

@@ -9,7 +9,11 @@ async function getPerUser(req, res) {
 		total: 0
 	}
 
-	CartItem.find({ user: req.user._id, wish: false }, async (err, items) => {
+	let ci = CartItem.find({ user: req.user._id, wish: false }) 
+	
+	if(req.query.wish) ci.where("wish").equals(true)
+
+	ci.exec(async (err, items) => {
 		
 		if (err) return res.json({ err: errorMsg("Error retrieving cart items") })
 		

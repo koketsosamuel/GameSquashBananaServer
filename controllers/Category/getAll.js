@@ -10,28 +10,29 @@ async function getAll(req, res) {
 		{},
 		null,
 		{ sort: { name: 1 } },
-		async (err, results) => {
+		async (err, _results) => {
 			if (err)
 				return res.json({ err: errorMsg("Error fetching categories") })
 
-			resultsFinal = [...results]
+			resultsFinal = [..._results]
 			sendRes = []
 
-			for await (let i of results) {
-				await SubCategory.find({ category: i._id }, (err, results) => {
+			for (let i = 0; i < _results.length; i++) {
+				await SubCategory.find({ category: _results[i]._id }, (err, results) => {
 					if (err)
 						return res.json({
 							err: errorMsg("Error fetching sub categories"),
 						})
-					i = {
-						...i._doc,
+					
+					sendRes.push({
+						..._results[i]._doc,
 						subs: results,
-					}
-
-					sendRes.push(i)
+					})
 				})
 			}
+			
 			res.json({ results: sendRes })
+			
 		}
 	)
 }

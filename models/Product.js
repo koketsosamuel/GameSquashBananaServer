@@ -3,11 +3,8 @@ const search = require("mongoose-regex-search")
 
 const ProductSchema = new mongoose.Schema({
 	
-	category: {
-		type: String,
-		required: false,
-	},
-
+	category: String,
+	
 	subCategory: String,
 
 	name: {

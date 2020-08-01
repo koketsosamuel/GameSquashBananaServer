@@ -6,4 +6,6 @@ service
 
 remove loggings
 dont show discontinued for non admin/product manager
-product delete if not in orders
+product delete if not in orders / sold === 0
+mongoose error messages for non unique and requireds
+commenting

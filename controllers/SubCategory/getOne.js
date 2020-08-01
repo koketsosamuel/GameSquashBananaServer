@@ -4,7 +4,7 @@ const SubCategory = require("../../models/SubCategory")
 function getOne(req, res) {
 	SubCategory.findOne(
 		{
-			_id: req.params.id,
+			_id: req.params.subCategoryId,
 		},
 		(err, results) => {
 			if (err)

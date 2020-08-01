@@ -3,6 +3,8 @@ const Category = require("../../models/Category")
 const SubCategory = require("../../models/SubCategory")
 
 function getOne(req, res) {
+
+	// get the category
 	Category.findOne(
 		{
 			_id: req.params.categoryId,
@@ -13,6 +15,7 @@ function getOne(req, res) {
 			if (!results)
 				return res.json({ err: errorMsg("Category not found") })
 
+			// get related sub categories
 			SubCategory.find(
 				{ category: results._id },
 				null,
