@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
 const ProductReviewSchema = new mongoose.Schema({
+	
 	rating: {
 		type: Number,
 		required: true,
@@ -21,7 +22,7 @@ const ProductReviewSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	show: {
+	approved: {
 		type: Boolean,
 		default: false,
 	},
@@ -36,6 +37,7 @@ const ProductReviewSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+
 })
 
 let ProductReview = mongoose.model("ProductReview", ProductReviewSchema)

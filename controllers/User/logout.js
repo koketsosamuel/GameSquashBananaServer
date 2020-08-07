@@ -1,6 +1,6 @@
 function logout(req, res) {
 
-    req.session.auth = null
+    req.session = null
     res.json({msg: "Logged out!"})
 
 }

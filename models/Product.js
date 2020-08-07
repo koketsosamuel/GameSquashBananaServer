@@ -42,6 +42,8 @@ const ProductSchema = new mongoose.Schema({
 
 	overallRating: Number,
 
+	nReviews: Number,
+
 	discontinued: {
 		type: Boolean,
 		default: false,

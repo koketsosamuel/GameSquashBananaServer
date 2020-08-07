@@ -1,31 +1,61 @@
 const OrderItem = require("../../models/OrderItem")
+const ProductReview = require("../../models/ProductReview")
 const errorMsg = require("../../util/errorMsg")
+const overallRating = require("./helpers/overallRating")
 const leo = require("leo-profanity")
 
 // init bad word filter
 leo.loadDictionary()
 
 async function add(req, res) {
+	
 	let bought = false
+	let err = false
+	let exists = false
 
 	// check if user has ever purchased product
-	await OrderItem.findOne({ userId: req.user._id }, (err, item) => {
-		if (err) return res.json({ err: errorMsg("Error making review") })
+	await OrderItem.findOne({ userId: req.user._id, product: req.body.product }, (_err, item) => {
+		if(_err) return err = _err
 		if (item) bought = true
 	})
+
+		
+	await ProductReview.findOne({ user: req.user._id, product: req.body.product }, (_err, rev) => {
+		if(_err) return err = _err
+		if(rev) {
+			err = false
+			exists = true
+			rev.comment = leo.clean(req.body.comment)
+			rev.rating = req.body.rating
+			rev.approved = false
+			rev.save(err => {
+				if (err) return res.json({ err: errorMsg("Error updating review") })
+				res.json({msg: "Review updated!"})
+			})
+		}
+		
+	})
+
+	if (exists) {
+		overallRating(req.body.product, false)
+		return false
+	}
+
+	if (err) return res.json({ err: errorMsg("Error making review") })
 
 	let newReview = new ProductReview({
 		rating: Number(req.body.rating),
 		comment: leo.clean(req.body.comment), // filter bad words
-		user: req.user.email,
+		user: req.user._id,
 		nameOfUser: req.user.name,
-		product: req.params.product,
-		show: bought,
+		product: req.body.product,
+		approved: bought,
 	})
 
 	newReview.save((err) => {
 		if (err) return res.json({ err: errorMsg("Error adding your review") })
 		res.json({ msg: "Review made!" })
+		overallRating()
 	})
 }
 

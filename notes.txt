@@ -9,3 +9,6 @@ dont show discontinued for non admin/product manager
 product delete if not in orders / sold === 0
 mongoose error messages for non unique and requireds
 commenting
+validation in the server
+overall rating must be done slowly in production
+overall rating repeats some queries and outputs something incorrect first

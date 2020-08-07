@@ -7,7 +7,6 @@ const discontinue = require("./discontinue")
 const continueP = require("./continue")
 const addThumb = require("./addThumb")
 const changeQuantity = require("./changeQuantity")
-const getDiscontinued = require("./getDiscontinued")
 
 module.exports = {
 	add,
@@ -19,5 +18,4 @@ module.exports = {
 	search,
 	addThumb,
 	changeQuantity,
-	getDiscontinued,
 }

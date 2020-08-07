@@ -6,25 +6,32 @@ const errorMsg = require("../../util/errorMsg")
 async function changePassword(req, res) {
 
     let user = {}
+    let match = true
 
     await User.findOne({_id: req.user._id}, (err, _user) => {
         if(err) return res.json({err: errorMsg("Error changing password")})
         user = _user
     })
 
-    await bcrypt.compare(req.body.pwdOld, user.pwd, (err, match) => {
+    await bcrypt.compare(req.body.oldPwd, user.pwd, (err, _match) => {
         if(err) return res.json({err: errorMsg("Error changing password")})
-        if(!match) return res.json({err: errorMsg("Incorrect old password")})
+        match = _match
     })
 
-    bcrypt.hash(req.body.newPwd, authConf.saltRounds, (err, hash) => {
+    if(!match) return res.json({err: errorMsg("Incorrect old password")})
+
+    await bcrypt.hash(req.body.newPwd, authConf.saltRounds, (err, hash) => {
         if(err) return res.json({err: errorMsg("Error changing password")})
-        user.pwd = hash
+        user.pwd = hash     
+        
         user.save(err => {
+            console.log(err)
             if(err) return res.json({err: errorMsg("Error changing password")})
             res.json({msg: "Password changed"})
         })
     })
+
+    
 
 }
 

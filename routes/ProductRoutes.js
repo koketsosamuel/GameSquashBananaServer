@@ -11,7 +11,6 @@ router.put("/thumb/:productId", upload.single("thumb"), Product.addThumb)
 router.put("/quantity/:productId", Product.changeQuantity)
 router.put("/discontinue/:productId", Product.discontinue)
 router.put("/continue/:productId", Product.continue)
-router.get("/discontinued/all", Product.getDiscontinued)
 router.get("/search", Product.search)
 
 // router.delete("/:productId", Products.remove)

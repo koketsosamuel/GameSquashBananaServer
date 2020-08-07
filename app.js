@@ -35,6 +35,7 @@ const ProductRoutes = require("./routes/ProductRoutes")
 const ProductImageRoutes = require("./routes/ProductImageRoutes")
 const RandomUserRoutes = require("./routes/RandomUserRoutes")
 const CartItemRoutes = require("./routes/cartItemRoutes")
+const ProductReviewsRoutes = require("./routes/ProductReview")
 
 // routes
 app.use("/users", UserRoutes)
@@ -44,5 +45,6 @@ app.use("/products", ProductRoutes)
 app.use("/productimages", ProductImageRoutes)
 app.use("/randomusers", RandomUserRoutes)
 app.use("/cartitems", CartItemRoutes)
+app.use("/productreviews", ProductReviewsRoutes)
 
 app.listen(process.env.PORT || serverConf.port)

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const authConf = require("../../config/auth")
+const User = require("../../models/User")
 
 function checkAuth(req, res) {
 
@@ -9,10 +10,17 @@ function checkAuth(req, res) {
         
         let token = req.session.auth
         let user = jwt.verify(token, authConf.jwtKeyAuthKey)
+
+        User.findOne({_id: user._id}, (err, _user) => {
+
+            if(err || !user) throw err
+            res.json({results: _user})
+
+        })
         
-        res.json({results: user})
 
     } catch(err) {
+        req.session = null
         res.json({})
     }
 

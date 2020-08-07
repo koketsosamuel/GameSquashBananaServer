@@ -2,7 +2,7 @@ const ProductReview = require("../../models/ProductReview")
 const errorMsg = require("../../util/errorMsg")
 
 function getOne(req, res) {
-	ProductReview.findById(req.params.reviewId, (err, results) => {
+	ProductReview.findById(req.params.productId, (err, results) => {
 		if (err)
 			return res.json({
 				err: errorMsg("Unexpected error fetching review"),

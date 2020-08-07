@@ -6,9 +6,13 @@ function getAll(req, res) {
 
 	let find
 	
-	if (req.query.s) find = Product.search(req.query.s)
+	if (req.query.s) {
+		find = Product.search(req.query.s)
+	}
 	else find = Product.find({})
 	
+
+
 	filterAndSort(find, req.query, res)
 }
 

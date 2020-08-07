@@ -1,51 +1,23 @@
 const ProductReview = require("../../models/ProductReview")
 const errorMsg = require("../../util/errorMsg")
+const dbHelpers = require("../../util/dbHelpers")
 
-// ?page=3&?perpage=10
-function getPerProduct(req, res) {
-	let perpage = Number(req.query.perpage) || 10
-	let page = Number(req.query.page) || 1
-	let pages
-	let nav = {
-		next: null,
-		prev: null,
-		pages: null,
-		page,
-	}
+async function getPerProduct(req, res) {
+	
+	let queryObj = { product: req.params.productId, approved: true }
 
-	ProductReview.find({ product: req.params.productId, show: true })
+	let p = ProductReview.find(queryObj)
 		.sort({
 			createdAt: -1,
 		})
 
-		.exec((err, results) => {
-			if (err)
-				return res.json({
-					err: errorMsg("Unexpected error while fetching reviews"),
-				})
+	await ProductReview.countDocuments(queryObj, (err, count) => {
+		if(err) return res.json({err: errorMsg("Error fetching reviews")})
+		dbHelpers.paginateRecords(p, req.query, res, count)
+	})
 
-			pages = Math.ceil(results.length / perpage)
 
-			if (page < 1) page = 1
-			if (page > pages) page = pages
-			if (perpage < 5) perpage = 5
-
-			if (page > 1) nav.prev = page - 1
-			if (page < pages) nav.next = page + 1
-
-			nav.pages = pages
-			nav.page = page
-			nav.perpage = perpage
-
-			res.json({
-				nav,
-				results: results.splice(perpage * (page - 1) - 1, perpage - 1),
-			})
-		})
+		
 }
 
 module.exports = getPerProduct
-
-/*
-    Get all reviews for each product with pagination
-*/
