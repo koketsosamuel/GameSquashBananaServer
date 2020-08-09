@@ -64,6 +64,12 @@ const ProductSchema = new mongoose.Schema({
 		default: Date.now,
 	},
 
+	deletedAt: {
+		type: Date,
+		default: null,
+		index: true
+	},
+
 	updatedAt: Date,
 
 })

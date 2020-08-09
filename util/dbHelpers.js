@@ -31,7 +31,7 @@ async function filterAndSort(ModelFind, queryObj, res) {
 
 	// rating filtering
 	if (queryObj.rating) {
-		ModelFind.where("rating").gte(queryObj.rating)
+		ModelFind.where("overallRating").gte(queryObj.rating)
 	}
 
 	// in stock rating

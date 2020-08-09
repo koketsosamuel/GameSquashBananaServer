@@ -6,13 +6,9 @@ function getAll(req, res) {
 
 	let find
 	
-	if (req.query.s) {
-		find = Product.search(req.query.s)
-	}
-	else find = Product.find({})
+	if (req.query.s) find = Product.search(req.query.s)
+	else find = Product.find({deletedAt: null})
 	
-
-
 	filterAndSort(find, req.query, res)
 }
 

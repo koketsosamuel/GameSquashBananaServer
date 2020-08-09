@@ -13,6 +13,8 @@ function addThumb(req, res) {
 		fileCOnf.thumbnailFolder +
 		"/" +
 		req.params.productId +
+		"."
+		+
 		imageExt
 
 	imageResize(req.body.image.image, outThum, fileCOnf.thumbnailSizeWidth, false)

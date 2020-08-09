@@ -1,14 +1,16 @@
 error messages with better understanding
 affliate system
 service
+    
     check if category for product still exists, if it doesnt set category to null
     
+    check for deletedAt field and delete if date is 30 days or more, also remove it in the cart and its images
 
 remove loggings
 dont show discontinued for non admin/product manager
-product delete if not in orders / sold === 0
 mongoose error messages for non unique and requireds
 commenting
 validation in the server
 overall rating must be done slowly in production
 overall rating repeats some queries and outputs something incorrect first
+try catch for conversions
