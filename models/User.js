@@ -1,17 +1,20 @@
 const mongoose = require("mongoose")
+const search = require("mongoose-regex-search")
 
 const UserSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        required: true
+        required: true,
+        searchable: true
     },
 
     email: {
         type: String,
         required: true,
         unique: true,
-        index: true
+        index: true,
+        searchable: true
     },
 
     pwd: {
@@ -22,6 +25,13 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
+        searchable: true,
+        searchable: true
+    },
+
+    isSuper: {
+        type: Boolean,
+        default: false
     },
 
     isAdmin: {
@@ -29,9 +39,24 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
 
-    roles: {
-        type: Array,
-        default: []
+    isProductManager: {
+        type: Boolean,
+        default: false
+    },
+
+    isOrderManager: {
+        type: Boolean,
+        default: false
+    },
+
+    isDeliveryManager: {
+        type: Boolean,
+        default: false
+    },
+
+    banned: {
+        type: Boolean,
+        default: false
     },
 
     createdAt: {
@@ -43,6 +68,7 @@ const UserSchema = new mongoose.Schema({
 
 })
 
+UserSchema.plugin(search)
 let User = mongoose.model("User", UserSchema)
 
 module.exports = User

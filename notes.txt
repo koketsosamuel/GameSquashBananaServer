@@ -14,3 +14,4 @@ validation in the server
 overall rating must be done slowly in production
 overall rating repeats some queries and outputs something incorrect first
 try catch for conversions
+banned users cant login

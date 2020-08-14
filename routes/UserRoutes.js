@@ -12,6 +12,10 @@ router.post("/checkauth", userController.checkAuth)
 router.put("/email", verifyAth, userController.changeEmail)
 router.put("/password", verifyAth, userController.changePassword)
 router.put("/phone", verifyAth, userController.changePhone)
+router.put("/ban/:userId", userController.banUser)
+router.put("/roles/:userId", userController.roleAssignment)
+router.get("/", userController.getAll)
+
 // router.post("/emailverifylink", userController.emailVerifyLink)
 // router.post("/emailverify/:token", userController.emailVerify)
 

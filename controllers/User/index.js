@@ -7,6 +7,9 @@ const checkAuth = require("./checkAuth")
 const changePhone = require("./changePhone")
 const changeEmail = require("./changeEmail")
 const changePassword = require("./changePassword")
+const banUser = require("./banUser")
+const getAll = require("./getAll")
+const roleAssignment = require("./roleAssignment")
 
 module.exports = {
 	register,
@@ -17,5 +20,8 @@ module.exports = {
 	checkAuth,
 	changePassword,
 	changeEmail,
-	changePhone
+	changePhone,
+	banUser,
+	getAll,
+	roleAssignment
 }
