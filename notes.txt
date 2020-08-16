@@ -10,8 +10,9 @@ remove loggings
 dont show discontinued for non admin/product manager
 mongoose error messages for non unique and requireds
 commenting
-validation in the server
+field validation in the server
 overall rating must be done slowly in production
 overall rating repeats some queries and outputs something incorrect first
 try catch for conversions
 banned users cant login
+free transport for order greater >= x
