@@ -12,12 +12,12 @@ const app = express()
 app.set('trust proxy', 1) // trust first proxy
  
 app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2'],
-  cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 100,
-      sameSite: "strict"
-  }
+  
+    name: 'session',
+    keys: ['key1', 'key2'],
+    maxAge: 1000 * 60 * 60 * 24 * 1000,
+    sameSite: "Strict",
+  
 }))
 
 app.use(bp.json())
@@ -34,9 +34,10 @@ const SubCategoryRoutes = require("./routes/SubCategoryRoutes")
 const ProductRoutes = require("./routes/ProductRoutes")
 const ProductImageRoutes = require("./routes/ProductImageRoutes")
 const RandomUserRoutes = require("./routes/RandomUserRoutes")
-const CartItemRoutes = require("./routes/cartItemRoutes")
-const ProductReviewsRoutes = require("./routes/ProductReview")
+const CartItemRoutes = require("./routes/CartItemRoutes")
+const ProductReviewsRoutes = require("./routes/ProductReviewRoutes")
 const CouponRoutes = require("./routes/CouponRoutes")
+const BannerRoutes = require("./routes/BannerRoutes")
 
 // routes
 app.use("/users", UserRoutes)
@@ -48,5 +49,6 @@ app.use("/randomusers", RandomUserRoutes)
 app.use("/cartitems", CartItemRoutes)
 app.use("/productreviews", ProductReviewsRoutes)
 app.use("/coupons", CouponRoutes)
+app.use("/banners", BannerRoutes)
 
 app.listen(process.env.PORT || serverConf.port)

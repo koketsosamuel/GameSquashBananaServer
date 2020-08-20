@@ -16,3 +16,20 @@ overall rating repeats some queries and outputs something incorrect first
 try catch for conversions
 banned users cant login
 free transport for order greater >= x
+remove outdated coupons/ coupons that reached max usage
+
+goto coupon/add & update
+    approved: req.user.isSuper
+
+banner 
+    auto remove
+
+create folders
+    upload
+        banner
+        img
+        thumbs
+        tmpImg
+
+
+update tax amounts on tax change

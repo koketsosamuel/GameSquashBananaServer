@@ -4,7 +4,7 @@ const errorMsg = require("../../util/errorMsg")
 const imageResize = require("../../util/imageResize")
 const ProductImage = require("../../models/ProductImage")
 
-function addThumb(req, res) {
+async function addThumb(req, res) {
 
 	let imageExt = req.body.image.image.split(".")
 	imageExt = imageExt[imageExt.length - 1]
@@ -17,9 +17,9 @@ function addThumb(req, res) {
 		+
 		imageExt
 
-	imageResize(req.body.image.image, outThum, fileCOnf.thumbnailSizeWidth, false)
+	await imageResize(req.body.image.image, outThum, fileCOnf.thumbnailSizeWidth, false)
 
-	Product.updateOne({_id: req.params.productId}, {
+	await Product.updateOne({_id: req.params.productId}, {
 		thumb: outThum
 	}, err => {
 		if(err) return res.json({err: errorMsg("Error adding thumbnail")})

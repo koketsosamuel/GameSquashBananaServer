@@ -12,7 +12,16 @@ function update(req, res) {
 			category: req.body.category,
 			subCategory: req.body.subCategory || null,
 			tags: req.body.tags,
+
 			price: req.body.price,
+		
+			// calculate vat amount and round to two decimal places
+			taxAmount: 
+				Math.round(
+					Number(
+						req.body.price * (req.body.vat ? getSettings("../../settings.json").vat : 0)
+					) * 100) / 100,
+
 			updatedAt: Date.now(),
 			quantity: req.body.quantity,
 			vat: req.body.vat,

@@ -9,18 +9,24 @@ async function getPerUser(req, res) {
 		total: 0
 	}
 
-	let ci = CartItem.find({ user: req.user._id, wish: false }) 
+	// find cart items in the cart for user
+	let cartItemQuery = CartItem.find({ user: req.user._id }) 
 	
-	if(req.query.wish) ci.where("wish").equals(true)
+	if(req.query.wish) cartItemQuery.where("wish").equals(true)
+	else cartItemQuery.where("wish").equals(false)
 
-	ci.exec(async (err, items) => {
+	cartItemQuery.exec(async (err, items) => {
 		
 		if (err) return res.json({ err: errorMsg("Error retrieving cart items") })
 		
+		// loop through cart items
 		for (let i of items) {
+
+			// find related products
 			await Product.findById(i.product, (err, doc) => {
 				cart.items.push({...i._doc, product: doc})
-				cart.total += doc.price * i.quantity
+				cart.total += (doc.price + doc.taxAmount) * i.quantity
+				cart.taxTotal += doc.taxAmount * i.quantity
 			})
 		}
 		

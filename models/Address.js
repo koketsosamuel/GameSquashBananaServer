@@ -1,13 +1,48 @@
 const mongoose = require("mongoose")
 
 const AddressSchema = new mongoose.Schema({
-	address: {
+	
+	address1: {
 		type: String,
 		required: true,
 	},
 
+	address2: String,
+
+	additionalInfo: String,
+
+	postalCode: {
+		type: Number,
+		required: true
+	},
+
+	city: {
+		type: String,
+		required: true
+	},
+
+	surburb: {
+		type: String,
+		required: true
+	},
+
+	province: {
+		type: String,
+		required: true
+	},
+
 	coords: {
 		type: String,
+	},
+
+	recipientName: {
+		type: String,
+		required: true
+	},
+
+	recipientPhone: {
+		type: String,
+		required: true
 	},
 
 	user: {

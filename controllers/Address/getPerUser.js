@@ -4,9 +4,10 @@ const errorMsg = require("../../util/errorMsg")
 function getPerUser(req, res) {
 	Address.find(
 		{ user: req.user._id },
+		null,
 		{
 			sort: "-createdAt",
-			limit: 5,
+			limit: 10
 		},
 		(err, addresses) => {
 			if (err)

@@ -26,15 +26,18 @@ let couponSchema = new mongoose.Schema({
     },
 
     startDate: {
-        type: Date,
+        type: String,
         required: true
     },
 
-    endDate: Date,
+    endDate: String,
 
     nUses: Number,
 
-    maxNUses: Number,
+    maxNUses: {
+        type: Number,
+        default: 0
+    },
 
     createdAt: {
         type: Date,

@@ -4,6 +4,8 @@ const authConf = require("../config/auth")
 
 module.exports = (req, res, next) => {
     
+    console.log(req.session)
+
     try {
 
         if(req.session.auth) {
@@ -35,6 +37,7 @@ module.exports = (req, res, next) => {
             req.session.randomUser = {...doc._doc}
 
             req.user = doc._doc
+            console.log(req.session.randomUser)
             next()
         })
         

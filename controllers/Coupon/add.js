@@ -10,7 +10,7 @@ function add(req, res) {
         amountOff: req.body.amountOff,
         minAmount: req.body.minAmount,
         maxAmountOff: req.body.maxAmountOff,
-        approved: req.user.isSuper || false,
+        approved: false,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         nUses: req.body.nUses,
@@ -20,7 +20,7 @@ function add(req, res) {
 
     newCoupon.save(err => {
         if(err) return res.json({err: errorMsg("Error adding coupon")})
-        res.json({msg: "Coupon added! " + (req.user.isSuper ? "" : "Waiting approval.")})
+        res.json({msg: "Coupon added! "}) //+ (req.user.isSuper ? "" : "Waiting approval.")})
     })
 
 }

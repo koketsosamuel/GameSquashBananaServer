@@ -4,12 +4,12 @@ const errorMsg = require("../../util/errorMsg")
 const imageResize = require("../../util/imageResize")
 const { optimizedImgFolder } = require("../../config/file")
 
-function add(req, res) {
+async function add(req, res) {
 
 	let image = req.file
 	let outpath =
 		optimizedImgFolder + "/" + Date.now() + req.file.originalname
-	imageResize(image.path, outpath)
+	await imageResize(image.path, outpath)
 
 	let newPI = new ProductImage({
 		image: outpath,

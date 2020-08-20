@@ -10,7 +10,7 @@ function update(req, res) {
         amountOff: req.body.amountOff,
         minAmount: req.body.minAmount,
         maxAmountOff: req.body.maxAmountOff,
-        approved: req.user.isSuper || false,
+        approved: false,//req.user.isSuper || false,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         nUses: req.body.nUses,
@@ -18,8 +18,9 @@ function update(req, res) {
         updateAt: Date.now()
 
     }, err => {
+        console.log(err)
         if(err) return res.json({err: errorMsg("Error updating coupon")})
-        res.json({msg: "Coupon updated! " + (req.user.isSuper ? "" : "Waiting approval.")})
+        res.json({msg: "Coupon updated! "}) //+ (req.user.isSuper ? "" : "Waiting approval.")})
     })
 
 }
