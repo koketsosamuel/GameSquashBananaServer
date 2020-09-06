@@ -3,13 +3,15 @@ const errorMsg = require("../../util/errorMsg")
 const checkExistence = require("./helpers/checkExistence")
 
 async function cartToWish(req, res) {
-	
+    
+    
+    // we receive an array
 	for(let i = 0; i < req.body.items.length;i++) {
 
-        let exists = await checkExistence(req.user._id, req.body.items[i], true)
+        let exists = await checkExistence(req.user._id, req.body.items[i].product._id, true)
 
         if(!exists) 
-            await CartItem.updateOne({ _id: req.body.items[i], user: req.user._id }, {
+            await CartItem.updateOne({ _id: req.body.items[i]._id, user: req.user._id }, {
                 wish: true,
                 quantity: 1
             },(err) => {
@@ -17,7 +19,7 @@ async function cartToWish(req, res) {
             })
 
         else 
-            await CartItem.deleteOne({ _id: req.body.items[i], user: req.user._id, wish: false },(err) => {
+            await CartItem.deleteOne({ _id: req.body.items[i]._id, user: req.user._id, wish: false },(err) => {
                 if(err) return res.json({err: errorMsg("Couldnt move some of the items to wishlist")})
             })
 	}

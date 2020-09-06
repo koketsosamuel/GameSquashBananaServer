@@ -12,7 +12,6 @@ async function changePhone(req, res) {
 
     user.phone = req.body.newPhone
     user.save(err => {
-        console.log(err)
         if(err) return res.json({err: errorMsg("Error changing phone number")})
         res.json({msg: "Phone number changed"})
     })

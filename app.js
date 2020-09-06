@@ -4,8 +4,10 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const serverConf = require("./config/server")
 const cookieSession = require("cookie-session")
-const authConf = require("./config/auth")
 const dbConf = require("./config/database")
+
+var time = new Date().getTime() + 1000 * 60 * 60 * 24 * 90
+var date = new Date(time)
 
 const app = express()
 
@@ -15,7 +17,8 @@ app.use(cookieSession({
   
     name: 'session',
     keys: ['key1', 'key2'],
-    maxAge: 1000 * 60 * 60 * 24 * 1000,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+    expires: date,
     sameSite: "Strict",
   
 }))
@@ -38,6 +41,9 @@ const CartItemRoutes = require("./routes/CartItemRoutes")
 const ProductReviewsRoutes = require("./routes/ProductReviewRoutes")
 const CouponRoutes = require("./routes/CouponRoutes")
 const BannerRoutes = require("./routes/BannerRoutes")
+const AddressRoutes = require("./routes/AddressRoutes")
+const OrderRoutes = require("./routes/OrderRoutes")
+const ReportRoutes = require("./routes/ReportRoutes")
 
 // routes
 app.use("/users", UserRoutes)
@@ -50,5 +56,8 @@ app.use("/cartitems", CartItemRoutes)
 app.use("/productreviews", ProductReviewsRoutes)
 app.use("/coupons", CouponRoutes)
 app.use("/banners", BannerRoutes)
+app.use("/addresses", AddressRoutes)
+app.use("/orders", OrderRoutes)
+app.use("/reports", ReportRoutes)
 
 app.listen(process.env.PORT || serverConf.port)

@@ -33,3 +33,8 @@ create folders
 
 
 update tax amounts on tax change
+addedBy field in model
+sanitize incoming data
+remove additional old addresses if user has more than 5
+
+cart to wish redundancy

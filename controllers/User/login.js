@@ -16,12 +16,14 @@ function login(req, res) {
 				res.json({ err })
 			} else if (match) {
 				// create and issue token
-				let token = jwt.sign({ ...user._doc }, authConf.jwtKeyAuthKey, {
-					expiresIn: "1h",
-				})
+				let token = jwt.sign({ ...user._doc }, authConf.jwtKeyAuthKey)
 				
 				//if(req.body.keepMeLoggedIn) req.sessionOptions.maxAge = null
 				req.session.auth = token
+				if(!req.body.keepMeLoggedIn) {
+					req.sessionOptions.maxAge = null
+					req.sessionOptions.expires = null
+				}
 				
 				if(req.session.randomUser) mergeCarts(req.session.randomUser._id, user._id)
 				

@@ -3,12 +3,11 @@ const jwt = require("jsonwebtoken")
 const authConf = require("../config/auth")
 
 module.exports = (req, res, next) => {
-    
-    console.log(req.session)
 
     try {
 
-        if(req.session.auth) {
+
+        if(req.session && req.session.auth > 0) {
             
             let token = req.session.auth
             let user = jwt.verify(token, authConf.jwtKeyAuthKey)
@@ -28,6 +27,10 @@ module.exports = (req, res, next) => {
 
     } catch(err) {
 
+        if(req.session.randomUser) {
+            req.user = req.session.randomUser
+            return 0
+        }
 
         let newRU = new RandomUser({})
 
@@ -37,10 +40,9 @@ module.exports = (req, res, next) => {
             req.session.randomUser = {...doc._doc}
 
             req.user = doc._doc
-            console.log(req.session.randomUser)
             next()
         })
-        
+            
     }
 
 }

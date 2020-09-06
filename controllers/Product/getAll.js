@@ -9,6 +9,7 @@ function getAll(req, res) {
 	if (req.query.s) find = Product.search(req.query.s)
 	else find = Product.find({deletedAt: null})
 	
+	//find.where
 	filterAndSort(find, req.query, res)
 }
 

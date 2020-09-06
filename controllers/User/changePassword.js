@@ -25,7 +25,6 @@ async function changePassword(req, res) {
         user.pwd = hash     
         
         user.save(err => {
-            console.log(err)
             if(err) return res.json({err: errorMsg("Error changing password")})
             res.json({msg: "Password changed"})
         })

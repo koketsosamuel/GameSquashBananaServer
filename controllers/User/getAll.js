@@ -5,10 +5,10 @@ function getAll(req,res) {
 
     let find
     let total
-    let perpage = req.query.perpage || 5
+    let perpage = req.query.perpage || 10
     let page = req.query.page || 1
 
-    if(!(perpage > 0)) perpage = 16
+    if(!(perpage > 0)) perpage = 10
     if(!(page > 0)) page = 1
 
     if(req.query.s) find = User.search(req.query.s)

@@ -3,8 +3,8 @@ const errorMsg = require("../../util/errorMsg")
 
 function getOne(req, res) {
 
-    Coupon.findOne({_id: req.params.couponId}, (err, coupon) => {
-
+    Coupon.findOne({code: req.params.couponCode}, (err, coupon) => {
+    
         if(err) return res.json({err: errorMsg("Error fetching coupon")})
         res.json({results: coupon})
 

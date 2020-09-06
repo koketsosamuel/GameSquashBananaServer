@@ -3,7 +3,29 @@ const mongoose = require("mongoose")
 let orderSchema = new mongoose.Schema({
 
     orderNum: {
-        type: Number
+        type: Number,
+        required: true,
+        unique: true
+    },
+
+    status: {
+        type: Number,
+        default: 1
+    },
+
+    userEmail: {
+        type: String,
+        required: true
+    },
+
+    userPhone: {
+        type: String,
+        required: true
+    },
+
+    userName: {
+        type: String,
+        required: true
     },
 
     user: {
@@ -17,6 +39,8 @@ let orderSchema = new mongoose.Schema({
         required: true
     },
 
+    amountBeforeCoupon: Number,
+
     coupon: String,
 
     deliveryFee: {
@@ -25,7 +49,12 @@ let orderSchema = new mongoose.Schema({
     },
 
     items: {
-        type: String,
+        type: Array,
+        required: true
+    },
+
+    address: {
+        type: Object,
         required: true
     },
 

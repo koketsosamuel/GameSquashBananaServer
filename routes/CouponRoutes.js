@@ -5,7 +5,7 @@ let router = Router()
 
 router.post("/", couponCotroller.add)
 router.get("/", couponCotroller.get)
-router.get("/:couponId", couponCotroller.getOne)
+router.get("/:couponCode", couponCotroller.getOne)
 router.put("/:couponId", couponCotroller.update)
 router.put("/discontinue/:couponId", couponCotroller.update)
 router.delete("/:couponId", couponCotroller.remove)

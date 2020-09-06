@@ -2,6 +2,9 @@ const errorMsg = require("../../util/errorMsg")
 const Product = require("../../models/Product")
 
 function update(req, res) {
+
+	let vat = req.body.vat ? 0.15 : 0
+
 	Product.updateOne(
 		{
 			_id: req.params.productId,
@@ -16,11 +19,8 @@ function update(req, res) {
 			price: req.body.price,
 		
 			// calculate vat amount and round to two decimal places
-			taxAmount: 
-				Math.round(
-					Number(
-						req.body.price * (req.body.vat ? getSettings("../../settings.json").vat : 0)
-					) * 100) / 100,
+			taxedAmount: 
+				Math.round(Number(req.body.price)),
 
 			updatedAt: Date.now(),
 			quantity: req.body.quantity,

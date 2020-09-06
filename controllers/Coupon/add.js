@@ -6,16 +6,9 @@ function add(req, res) {
     let newCoupon = new Coupon({
 
         code: req.body.code,
-        percOff: req.body.percOff,
         amountOff: req.body.amountOff,
-        minAmount: req.body.minAmount,
-        maxAmountOff: req.body.maxAmountOff,
-        approved: false,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        nUses: req.body.nUses,
-        maxNUses: req.body.maxNUses
-
+        minAmount: req.body.minAmount
+        
     })
 
     newCoupon.save(err => {

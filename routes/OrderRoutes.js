@@ -1,48 +1,14 @@
-const mongoose = require("mongoose")
+const { Router } = require("express")
+const orderController = require("../controllers/Order")
+const verifyAuth = require("../middleware/verifyAuth")
 
-const OrderSchema = new mongoose.Schema({
-	totalAmount: {
-		type: Number,
-		required: true,
-	},
+let router = Router()
 
-	orderId: {
-		type: Number,
-		required: true,
-	},
+router.get("/", verifyAuth,orderController.getAll)
+router.get("/one/:orderId", verifyAuth,orderController.getOne)
+router.post("/", verifyAuth,orderController.add)
+router.post("/", orderController.receive)
+router.get("/myorders", verifyAuth, orderController.getPerUser)
+router.put("/:orderId", verifyAuth, orderController.changeStatus)
 
-	address: {
-		type: String,
-		required: true,
-	},
-
-	recipientName: {
-		type: String,
-		required: true,
-	},
-
-	recipientPhone: {
-		type: String,
-		required: true,
-	},
-
-	additionalInfo: {
-		type: String,
-	},
-
-	user: {
-		type: String,
-		required: true,
-	},
-
-	status: {
-		type: String,
-		required: true,
-	},
-
-	pos: Number,
-})
-
-let Order = mongoose.Schema("Order", OrderSchema)
-
-module.exports = Order
+module.exports = router

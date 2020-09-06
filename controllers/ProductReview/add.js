@@ -1,4 +1,3 @@
-const OrderItem = require("../../models/OrderItem")
 const ProductReview = require("../../models/ProductReview")
 const errorMsg = require("../../util/errorMsg")
 const overallRating = require("./helpers/overallRating")
@@ -12,14 +11,7 @@ async function add(req, res) {
 	let bought = false
 	let err = false
 	let exists = false
-
-	// check if user has ever purchased product
-	await OrderItem.findOne({ userId: req.user._id, product: req.body.product }, (_err, item) => {
-		if(_err) return err = _err
-		if (item) bought = true
-	})
-
-		
+	
 	await ProductReview.findOne({ user: req.user._id, product: req.body.product }, (_err, rev) => {
 		if(_err) return err = _err
 		if(rev) {

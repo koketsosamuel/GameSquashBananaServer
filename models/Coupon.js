@@ -9,32 +9,9 @@ let couponSchema = new mongoose.Schema({
         index: true
     },
 
-    percOff: Number,
-
     amountOff: Number,
 
     minAmount: {
-        type: Number,
-        default: 0
-    },
-
-    maxAmountOff: Number,
-
-    approved: {
-        type: Boolean,
-        default: false
-    },
-
-    startDate: {
-        type: String,
-        required: true
-    },
-
-    endDate: String,
-
-    nUses: Number,
-
-    maxNUses: {
         type: Number,
         default: 0
     },

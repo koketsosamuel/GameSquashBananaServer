@@ -13,9 +13,7 @@ function passResetLink(req, res) {
 			// sign token
 			let token = jwt.sign(user, authConf.jwtKeyPwdResetKey)
 			res.json({ token, msg: "Reset link sent to " + email })
-			console.log(token)
 		} catch (err) {
-			console.log(err)
 			res.json({ err: errMsg("Error with token") })
 		}
 	})

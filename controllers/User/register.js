@@ -18,7 +18,7 @@ function register(req, res) {
 			name: user.name,
 			pwd: user.pwd,
 			email: user.email.toLowerCase(),
-			phone: user.phone,
+			phone: user.phone
 		})
 		// we save the user and respond to the client
 		newUser.save((err) => {

@@ -8,7 +8,6 @@ function update(req, res) {
     Banner.findOne({_id: req.params.bannerId}, async (err, banner) => {
         
         if(err || !banner) return res.json({err: errorMsg("Error updating banner")})
-        console.log(banner._doc)
 
         banner.title = req.body.title
         banner.link = req.body.link || null

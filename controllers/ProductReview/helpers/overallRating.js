@@ -36,9 +36,7 @@ function overallRating(productArr = [], i = 0) {
                 overallRating: productAvg,
                 nReviews: res.length 
             }, (err, r) => {
-                console.log(productAvg, res.length)
                 if(err) return false
-                // recurse
                 if((i + 1) < productArr.length) overallRating(productArr, i + 1)
             })
 

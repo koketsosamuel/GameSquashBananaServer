@@ -4,7 +4,7 @@ async function checkExistence(user, product, wish = false) {
 
     let res = false
 
-    await CartItem.findOne({user, product, wish: wish }, async (err, results) => {
+    await CartItem.findOne({user, product, wish }, async (err, results) => {
         res = await results || false
     })
     

@@ -18,7 +18,7 @@ const ProductSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	taxAmount: {
+	taxedAmount: {
 		type: Number,
 		default: 0
 	},
