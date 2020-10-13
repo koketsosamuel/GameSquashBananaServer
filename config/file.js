@@ -5,4 +5,5 @@ module.exports = {
 	thumbnailSizeWidth: 200,
 	thumbnailFolder: "./upload/thumbs",
 	uploadDirTemp: this.tempImgFolder,
+	bannerImagesFolder: "./upload/banner"
 }

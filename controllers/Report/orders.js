@@ -6,6 +6,7 @@ async function orders(req, res) {
         cancelled: 0,
         awaitingDelivery: 0,
         delivered: 0,
+        total: 0,
     }
 
     await Order.countDocuments({status: 0}, (err, count) => {
@@ -18,6 +19,10 @@ async function orders(req, res) {
 
     await Order.countDocuments({status: 2}, (err, count) => {
         orderReports.delivered = count
+    })
+
+    await Order.estimatedDocumentCount((err, count) => {
+        orderReports.total = count
     })
 
     res.json({results: orderReports})

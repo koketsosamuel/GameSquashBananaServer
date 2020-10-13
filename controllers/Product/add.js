@@ -22,6 +22,7 @@ function add(req, res) {
 	})
 
 	newProd.save((err, results) => {
+		console.log(err)
 		if (err) return res.json({ err: errorMsg("Error adding Product") })
 		res.json({ msg: "Product created!", results })
 	})

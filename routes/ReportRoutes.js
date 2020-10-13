@@ -7,5 +7,6 @@ router.get("/users", Report.users)
 router.get("/products", Report.products)
 router.get("/categories", Report.categories)
 router.get("/orders", Report.orders)
+router.get("/time", Report.time)
 
 module.exports = router
